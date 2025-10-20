@@ -38,7 +38,8 @@ nbdist/
 
 # Maven/Gradle local cache (if used)
 .mvn/
-.gradle/# build folders / IDE
+.gradle/
+# build folders / IDE
 bin/
 target/
 *.class
