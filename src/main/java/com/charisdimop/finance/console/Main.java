@@ -1,4 +1,9 @@
-package consoleFinanceManager;
+package com.charisdimop.finance.console;
+
+import com.charisdimop.finance.model.Category;
+import com.charisdimop.finance.model.TransactionType;
+import com.charisdimop.finance.model.UserAccount;
+import com.charisdimop.finance.service.PersonalFinanceManager;
 
 public class Main {
 	

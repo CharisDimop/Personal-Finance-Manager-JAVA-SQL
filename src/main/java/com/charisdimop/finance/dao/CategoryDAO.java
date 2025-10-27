@@ -1,6 +1,9 @@
-package consoleFinanceManager;
+package com.charisdimop.finance.dao;
 
 import java.util.ArrayList;
+
+import com.charisdimop.finance.model.Category;
+import com.charisdimop.finance.model.TransactionType;
 
 public class CategoryDAO {
 	

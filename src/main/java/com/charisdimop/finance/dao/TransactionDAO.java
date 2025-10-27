@@ -1,7 +1,10 @@
-package consoleFinanceManager;
+package com.charisdimop.finance.dao;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+
+import com.charisdimop.finance.model.Transaction;
+import com.charisdimop.finance.model.TransactionType;
 
 public class TransactionDAO {
 	

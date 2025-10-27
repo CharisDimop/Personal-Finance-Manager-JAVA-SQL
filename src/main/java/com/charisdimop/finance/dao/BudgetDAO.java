@@ -1,6 +1,8 @@
-package consoleFinanceManager;
+package com.charisdimop.finance.dao;
 
 import java.util.ArrayList;
+
+import com.charisdimop.finance.model.Budget;
 
 public class BudgetDAO {
 	

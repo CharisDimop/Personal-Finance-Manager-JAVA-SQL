@@ -1,4 +1,4 @@
-package consoleFinanceManager;
+package com.charisdimop.finance.model;
 
 import java.time.LocalDate;
 

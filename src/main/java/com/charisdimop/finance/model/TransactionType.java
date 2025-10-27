@@ -1,4 +1,4 @@
-package consoleFinanceManager;
+package com.charisdimop.finance.model;
 
 public enum TransactionType {
 	EXPENSE,

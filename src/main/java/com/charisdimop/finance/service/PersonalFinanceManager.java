@@ -1,7 +1,17 @@
-package consoleFinanceManager;
+package com.charisdimop.finance.service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+
+import com.charisdimop.finance.dao.BudgetDAO;
+import com.charisdimop.finance.dao.CategoryDAO;
+import com.charisdimop.finance.dao.TransactionDAO;
+import com.charisdimop.finance.dao.UserAccountDAO;
+import com.charisdimop.finance.model.Budget;
+import com.charisdimop.finance.model.Category;
+import com.charisdimop.finance.model.Transaction;
+import com.charisdimop.finance.model.TransactionType;
+import com.charisdimop.finance.model.UserAccount;
 
 //*******************************   SERVICE CLASS   ********************************
 

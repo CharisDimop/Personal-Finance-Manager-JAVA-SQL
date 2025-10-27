@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   
   <!--My ID (from my file)  -->
-  <groupId>com.charis.dimop</groupId>
+  <groupId>com.charisdimop.finance</groupId>
   <artifactId>personal-finance-manager</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 
@@ -39,7 +39,7 @@
     
   </dependencies>
 
-  <!-- 4. Settings for the "Build" (How its gonna run) -->
+  <!-- Settings for the "Build" (How its gonna run) -->
   <build>
     <plugins>
       <!-- Plugin in order to understand Java 21 -->
@@ -51,14 +51,14 @@
         </configuration>
       </plugin>
       
-      <!-- Plugin to JavaFX the right way -->
+      <!-- Plugin to run JavaFX the right way -->
       <plugin>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-maven-plugin</artifactId>
             <version>0.0.8</version>
             <configuration>
                 <!-- Here i ll put the package name and my Main class name -->
-                <mainClass>consoleFinanceManager.Main</mainClass>
+                <mainClass>com.charisdimop.finance.console.Main</mainClass>
             </configuration>
         </plugin>
     </plugins>
