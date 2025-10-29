@@ -58,7 +58,7 @@
             <version>0.0.8</version>
             <configuration>
                 <!-- Here i ll put the package name and my Main class name -->
-                <mainClass>com.charisdimop.finance.console.Main</mainClass>
+                <mainClass>com.charisdimop.finance.gui.MainApp</mainClass>
             </configuration>
         </plugin>
     </plugins>
