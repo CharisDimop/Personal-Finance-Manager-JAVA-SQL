@@ -17,6 +17,11 @@ import com.charisdimop.finance.model.UserAccount;
 
 public class PersonalFinanceManager {
 	
+	//i ll create one instance for everyone
+	public static final PersonalFinanceManager instance = new PersonalFinanceManager();
+	
+	private PersonalFinanceManager() {}
+	
 	//******************************  Transactions   ************************************
 	
 	// create a new transaction from the user

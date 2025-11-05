@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane fx:id="usernameField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="406.0" prefWidth="437.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.charisdimop.finance.controlerGUI.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="406.0" prefWidth="437.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.charisdimop.finance.gui.LoginController">
    <children>
       <Label layoutX="175.0" layoutY="22.0" text="Welcome!">
          <font>
@@ -21,7 +21,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField layoutX="152.0" layoutY="160.0" promptText="e.g. JoeDoe">
+      <TextField fx:id="usernameField" layoutX="152.0" layoutY="160.0" promptText="e.g. JoeDoe">
          <font>
             <Font size="14.0" />
          </font>
@@ -36,8 +36,8 @@
             <Font size="14.0" />
          </font>
       </PasswordField>
-      <Button fx:id="loginButton" layoutX="152.0" layoutY="260.0" mnemonicParsing="false" onAction="#handleLoginButtonAction" prefHeight="25.0" prefWidth="173.0" text="Login" />
-      <Hyperlink fx:id="signUpLink" layoutX="104.0" layoutY="296.0" prefHeight="26.0" prefWidth="269.0" text="You don't have an account yet? Sign up!">
+      <Button fx:id="loginButton" layoutX="152.0" layoutY="260.0" mnemonicParsing= "false" onAction="#handleLoginButtonAction" prefHeight="25.0" prefWidth="173.0" text="Login" />
+      <Hyperlink fx:id="signUpLink" layoutX="104.0" layoutY="296.0" prefHeight="26.0" prefWidth="269.0" onAction="#handleSignUpLinkAction" text="You don't have an account yet? Sign up!">
          <font>
             <Font size="14.0" />
          </font>
