@@ -8,6 +8,7 @@ import com.charisdimop.finance.dao.CategoryDAO;
 import com.charisdimop.finance.dao.TransactionDAO;
 import com.charisdimop.finance.dao.UserAccountDAO;
 import com.charisdimop.finance.model.Budget;
+import com.charisdimop.finance.model.BudgetStatusReport;
 import com.charisdimop.finance.model.Category;
 import com.charisdimop.finance.model.Transaction;
 import com.charisdimop.finance.model.TransactionType;
@@ -178,7 +179,64 @@ public class PersonalFinanceManager {
 	// *************************** Budgets *********************************************
 
 	public BudgetDAO budgetDAO = new BudgetDAO(); 
+	
+	//set a fixed monthly budget by a user for a category
+	public Budget setBudget(int userId, int categoryId, double limitAmount) {
+		
+	    if (limitAmount < 0) {
+	        throw new IllegalArgumentException("Budget limit cannot be negative.");
+	    }
+	    
+	    // check if budget exists
+	    Budget existingBudget = budgetDAO.findBudgetByUserAndCategory(userId, categoryId);
 
+	    if (existingBudget != null) {
+	        // if it exists update it
+	        existingBudget.setLimitAmount(limitAmount);
+	        System.out.println("Budget updated for category " + categoryId);
+	        return existingBudget;
+	    } else {
+	        // if it doesnt -> create a new budget
+	        Budget newBudget = new Budget(userId, categoryId, limitAmount);
+	        System.out.println("New budget created for category " + categoryId);
+	        return budgetDAO.addBudget(newBudget);
+	    }
+	}
+	
+	// new method that returns the data to the GUI
+	
+	public ArrayList<BudgetStatusReport> getBudgetStatusReports(int userId) {
+	    ArrayList<BudgetStatusReport> reports = new ArrayList<>();
+	    
+	    // take all the budgets set by the user
+	    ArrayList<Budget> userBudgets = budgetDAO.findBudgetsByUserId(userId);
+	    
+	    int currentMonth = LocalDate.now().getMonthValue();
+	    int currentYear = LocalDate.now().getYear();
+
+	    for (Budget budget : userBudgets) {
+	         
+	    	//total money spent on the category the current month
+	        double spent = transactionDAO.sumExpensesByUserIdAndCategoryForMonth(userId, budget.getCatID(), currentMonth, currentYear);
+	        
+	        // category name
+	        Category category = categoryDAO.findCategoryByID(budget.getCatID());
+	        String categoryName = (category != null) ? category.getName() : "Unknown";
+	        
+	        // make the report and add it in the list
+	        BudgetStatusReport aReport = new BudgetStatusReport(categoryName, budget.getLimitAmount(), spent);
+	        reports.add(aReport);
+	    }
+	    return reports;
+	}
+	
+
+	
+	/*********************************************************************
+	 * 
+	 * *********************    console methods   ************************
+	 * 
+	 * *******************************************************************
 	// set budget by the user
 	public Budget setMonthlyBudget(int userId, int categoryId, double limitAmount) {
 		
@@ -254,7 +312,7 @@ public class PersonalFinanceManager {
 	        }
 	        System.out.println("***********************************");
 	    }
-	}
+	}*/
 	
 	
 

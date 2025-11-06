@@ -8,26 +8,32 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.charisdimop.finance.gui.MainDashboardController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.charisdimop.finance.gui.MainDashboardController">
    <left>
       <VBox prefHeight="200.0" prefWidth="150.0" style="-fx-background-color: #EEEEEE;" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="dashboardButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleDashboardAction" text="Dashboard" />
             <Button fx:id="addIncomeButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleAddIncomeAction" prefHeight="25.0" prefWidth="166.0" text="Add Income" />
             <Button fx:id="addExpenseButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleAddExpenseAction" text="Add Expense" />
+            <Button fx:id="setBudgetsButton" maxWidth="1.7976931348623157E308" onAction="#handleSetBudgetsAction" text="Set Budgets" />
             <Button fx:id="logoutButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleLogoutAction" text="Logout" />
          </children>
       </VBox>
    </left>
    <center>
-     <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+     <AnchorPane prefHeight="702.0" prefWidth="818.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="welcomeLabel" layoutX="264.0" layoutY="33.0" text="Welcome!">
+            <Label fx:id="welcomeLabel" layoutX="289.0" layoutY="23.0" text="Welcome!">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <ListView fx:id="transactionsListView" layoutX="86.0" layoutY="106.0" prefHeight="405.0" prefWidth="455.0" />
+            <ListView fx:id="transactionsListView" layoutX="86.0" layoutY="106.0" prefHeight="423.0" prefWidth="296.0" />
+            <Label layoutX="393.0" layoutY="78.0" text="Current Month Budget Status:">
+               <font><Font name="System Bold" size="14.0" /></font>
+            </Label>
+            <ListView fx:id="budgetStatusListView" layoutX="382.0" layoutY="106.0" prefHeight="425.0" prefWidth="296.0" />
+            
          </children>
       </AnchorPane>
    </center>

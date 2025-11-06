@@ -23,7 +23,7 @@ public class SignUpController {
 
     @FXML
     public void initialize() {
-        errorLabel.setText(""); // Καθαρίζει το μήνυμα λάθους
+        errorLabel.setText(""); // clear error text
     }
 
     @FXML
@@ -32,37 +32,37 @@ public class SignUpController {
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
 
-        // 1. Έλεγχος αν τα πεδία είναι κενά
+        // check if fields are empty
         if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
             errorLabel.setText("Please fill in all fields.");
             return;
         }
 
-        // 2. Έλεγχος αν οι κωδικοί ταιριάζουν
+        // check if passwords match
         if (!password.equals(confirmPassword)) {
             errorLabel.setText("Passwords do not match.");
             return;
         }
 
-        // 3. Προσπάθεια εγγραφής καλώντας τον Manager!
+        // try to sign up with the manager object
         try {
             financeManager.signUp(username, password);
             
-            // Επιτυχία!
+            // success
             errorLabel.setText("Account created successfully! Please log in.");
             
-            // Εδώ θα μπορούσαμε να κλείσουμε αυτόματα το παράθυρο
-            // handleLoginLinkAction(); 
+            //close window
+            handleLoginLinkAction(); 
 
         } catch (IllegalArgumentException e) {
-            // Αποτυχία! (π.χ. το username υπάρχει ήδη)
+            // fail (e.g. username already exists)
             errorLabel.setText(e.getMessage());
         }
     }
 
     @FXML
     private void handleLoginLinkAction() {
-        // Αυτός είναι ο κώδικας για να κλείσεις το τρέχον παράθυρο
+        
         Stage stage = (Stage) loginLink.getScene().getWindow();
         stage.close();
         

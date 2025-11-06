@@ -1,5 +1,6 @@
 package com.charisdimop.finance.gui;
 
+import com.charisdimop.finance.model.BudgetStatusReport;
 import com.charisdimop.finance.model.Category;
 import com.charisdimop.finance.model.Transaction;
 import com.charisdimop.finance.model.TransactionType;
@@ -29,25 +30,37 @@ public class MainDashboardController {
     @FXML private Button dashboardButton; 
     @FXML private Button logoutButton;    
     @FXML private ListView<String> transactionsListView; 
+    @FXML private ListView<String> budgetStatusListView;
+    @FXML private Button setBudgetsButton; 
 
     private UserAccount currentUser;
     private PersonalFinanceManager financeManager = PersonalFinanceManager.instance;
     
     private ObservableList<String> transactionStrings = FXCollections.observableArrayList();
+    private ObservableList<String> budgetStatusStrings = FXCollections.observableArrayList();
 
     //called from loginController to get the user
     public void initializeUser(UserAccount user) {
         this.currentUser = user;
         welcomeLabel.setText("Welcome, " + currentUser.getUsername() + "!");
         transactionsListView.setItems(transactionStrings);
+        budgetStatusListView.setItems(budgetStatusStrings);
+        
+        refreshDashboard();
+    }
+    
+    //refreshes the info on the screen
+    private void refreshDashboard() {
         loadTransactionList();
+        loadBudgetStatus(); 
     }
 
-    //called when user presses 'Dashboard' (just refreshes the list)
+
+	//called when user presses 'Dashboard' (just refreshes the lists)
     @FXML
     private void handleDashboardAction() {
-        System.out.println("Refreshing transaction list...");
-        loadTransactionList();
+        System.out.println("Refreshing dashboard...");
+        refreshDashboard();
     }
 
     //called when user presses 'Add expense'
@@ -61,6 +74,34 @@ public class MainDashboardController {
     private void handleAddIncomeAction() {
         openTransactionWindow(TransactionType.INCOME);
     }
+    
+    //called when user presses 'Set Budgets'
+    @FXML
+    private void handleSetBudgetsAction() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/SetBudgetView.fxml"));
+            Parent root = loader.load();
+
+            // take the controller of set budget
+            SetBudgetController controller = loader.getController();
+            controller.initializeData(currentUser); // give the user
+
+            Stage popupStage = new Stage();
+            popupStage.setTitle("Set Monthly Budgets");
+            popupStage.setScene(new Scene(root, 400, 400));
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+            
+            // wait for the pop-up to close
+            popupStage.showAndWait();
+            
+            
+            refreshDashboard();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
 
    //called when user presses 'Logout'
     @FXML
@@ -129,4 +170,32 @@ public class MainDashboardController {
             transactionStrings.add(line);
         }
     }
+    
+    private void loadBudgetStatus() {
+        budgetStatusStrings.clear();
+        // we ask for the reports from the manager
+        ArrayList<BudgetStatusReport> reports = financeManager.getBudgetStatusReports(currentUser.getID());
+
+        if (reports.isEmpty()) {
+            budgetStatusStrings.add("No budgets set. Click 'Set Budgets'.");
+            return;
+        }
+
+        for (BudgetStatusReport report : reports) {
+            String line = String.format("%s (%.0f%%)",
+                                    report.getCategoryName(),
+                                    report.getPercentageSpent());
+            budgetStatusStrings.add(line);
+            
+            String line2 = String.format("  Spent %.2f / %.2f €",
+                                    report.getAmountSpent(),
+                                    report.getLimitAmount());
+            budgetStatusStrings.add(line2);
+            
+            if (report.getAmountRemaining() < 0) {
+                 budgetStatusStrings.add(String.format("  (%.2f € over budget!)", -report.getAmountRemaining()));
+            }
+        }
+    }
+
 }

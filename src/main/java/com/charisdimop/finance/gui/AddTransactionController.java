@@ -63,7 +63,7 @@ public class AddTransactionController {
 
     @FXML
     private void handleSaveButtonAction() {
-        // 1. Validation
+        // Validation
         double amount;
         try {
             amount = Double.parseDouble(amountField.getText());
@@ -84,11 +84,11 @@ public class AddTransactionController {
             description = "No description"; // put a default
         }
 
-        // 2. save through Manager
+        //  save through Manager
         try {
             financeManager.createTransaction(currentUser.getID(), transactionType, amount, selectedCategory.getID(), description);
             
-            // 3. Close the window (pop-up)
+            // Close the window (pop-up)
             Stage stage = (Stage) saveButton.getScene().getWindow();
             stage.close();
 
